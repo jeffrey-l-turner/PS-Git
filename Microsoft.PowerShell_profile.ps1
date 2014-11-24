@@ -4,7 +4,7 @@ $h.BackgroundColor = "Black"
 $h.ForegroundColor = "White";
 cls
 
-#start-ssh-agent.cmd
+start-ssh-agent.cmd
 # Load posh-git example profile
 . 'G:\Dev\posh-git\profile.example.ps1'
 cd g:\Dev\systemx
