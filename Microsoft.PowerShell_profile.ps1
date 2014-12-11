@@ -4,7 +4,7 @@ $h.BackgroundColor = "Black"
 $h.ForegroundColor = "White";
 cls
 
-start-ssh-agent.cmd
+#start-ssh-agent.cmd
 # Load posh-git example profile
 . 'G:\Dev\posh-git\profile.example.ps1'
 cd g:\Dev\systemx
@@ -37,7 +37,7 @@ function git-trackall()
 				Write-Host $_ ': current branch will not be tracked'
 			}else{
 				Write-Host 'Tracking ' $_
-				git branch -f --track $_ 
+				git branch --track $_ 
 			}
 		}
 	}else{
