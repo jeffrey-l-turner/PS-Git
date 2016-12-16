@@ -5,9 +5,11 @@ $h.BackgroundColor = "Blue" # RGB equiv for Atom is: ?
 $h.ForegroundColor = "White";
 #cls
 
+Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 #start-ssh-agent.cmd # this is started by default with post-git module using -quiet
 cd ~\source\PS-Git
 . .\posh-git.ps1
+Pop-Location
 $h.WindowTitle = "Posh Git PowerShell Session for - Jeff Turner";
 
 $global:GitAllSettings = New-Object PSObject -Property @{
