@@ -14,12 +14,12 @@ $global:GitAllSettings = New-Object PSObject -Property @{
 	FolderForegroundColor       = [ConsoleColor]::Cyan
 }
 
-function command-hist()
+function export-command-hist()
 {
 	Get-History | Export-Csv C:\temp\CommandHistory.CSV
 }
 
-function save-command-hist()
+function import-command-hist()
 {
  	Import-Csv C:\temp\CommandHistory.CSV | Add-History
 }
@@ -71,3 +71,4 @@ $sw.Stop()
 Write-Host "Completed in " $sw.Elapsed
 #git branch -v
 
+import-command-hist
