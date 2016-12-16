@@ -7,11 +7,19 @@ cls
 #start-ssh-agent.cmd
 # Load posh-git example profile
 . 'G:\Dev\posh-git\profile.example.ps1'
-cd g:\Dev\systemx
+cd ~\source
 $h.WindowTitle = "Posh Git PowerShell Session for - Jeff Turner";
 
 $global:GitAllSettings = New-Object PSObject -Property @{
 	FolderForegroundColor       = [ConsoleColor]::Cyan
+}
+
+function command-hist()
+	Get-History | Export-Csv C:\temp\CommandHistory.CSV
+}
+
+function save-command-hist()
+ 	Import-Csv C:\temp\CommandHistory.CSV | Add-History
 }
  
 function git-all()
