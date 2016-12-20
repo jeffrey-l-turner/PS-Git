@@ -202,4 +202,4 @@ End {
 } #end function Get-MyHistory
 
 #define an optional alias
-Set-Alias -Name gmh -Value Get-MyHistory
+Set-Alias -Name ht -Value Get-MyHistory
