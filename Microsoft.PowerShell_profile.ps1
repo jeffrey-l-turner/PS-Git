@@ -23,11 +23,12 @@ function export-command-hist()
 
 function import-command-hist()
 {
- 	Import-Csv ~\history.csv | Add-History
+ 	Import-Csv ~\history.csv | select -last 1000 | Add-History
 }
 
 function bye 
-{   Get-History | Export-CSV -Append ~\history.csv
+{
+   Get-History -Count 500 | Export-CSV -Append ~\history.csv
     exit
 }
  
