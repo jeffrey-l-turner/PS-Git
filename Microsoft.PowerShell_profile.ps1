@@ -18,12 +18,17 @@ $global:GitAllSettings = New-Object PSObject -Property @{
 
 function export-command-hist()
 {
-	Get-History | Export-Csv C:\temp\CommandHistory.CSV
+	Get-History | Export-Csv ~\history.csv
 }
 
 function import-command-hist()
 {
- 	Import-Csv C:\temp\CommandHistory.CSV | Add-History
+ 	Import-Csv ~\history.csv | Add-History
+}
+
+function bye 
+{   Get-History | Export-CSV -Append ~\history.csv
+    exit
 }
  
 function git-all()
