@@ -9,6 +9,7 @@ Import-Module posh-git
 
 [System.Collections.Stack]$GLOBAL:dirStack = @()
 $GLOBAL:oldDir = ''
+$GLOBAL:nowPath = ''
 $GLOBAL:addToStack = $true
 
 # Set up a simple prompt, adding the git prompt parts inside git repos, enable bd/back directory function
@@ -17,9 +18,9 @@ function global:prompt {
     $global:LASTEXITCODE = $realLASTEXITCODE
 
     $GLOBAL:nowPath = (Get-Location).Path
-    if(($nowPath -ne $oldDir) -AND ($GLOBAL:addToStack)){
+    if(($GLOBAL:nowPath -ne $oldDir) -AND ($GLOBAL:addToStack)){
         $GLOBAL:dirStack.Push($oldDir)
-        $GLOBAL:oldDir = $nowPath
+        $GLOBAL:oldDir = $GLOBAL:nowPath
     }
     $GLOBAL:AddToStack = $true
 
@@ -31,11 +32,13 @@ function global:prompt {
 }
 
 function BackOneDir{
-    $lastDir = $GLOBAL:dirStack.Pop()
-    $GLOBAL:addToStack = $false
-    if(($nowPath -ne $oldDir) -AND $GLOBAL:addToStack){
+    echo $GLOBAL:addToStack
+    echo $GLOBAL:dirStack
+    if(($GLOBAL:nowPath -ne $oldDir) -AND $GLOBAL:addToStack -AND ($GLOBAL:oldDir -ne '')){
+    	$lastDir = $GLOBAL:dirStack.Pop()
     	cd $lastDir
     }
+    $GLOBAL:addToStack = $false
 }
 Set-Alias bd BackOneDir
 
