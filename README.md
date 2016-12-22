@@ -13,3 +13,8 @@ From within PowerShell:
 _Note: you must modify the default install script if you use the alternative above._
 
 3. Customize the Microsoft.PowerShell_profile.ps1 in this directory to your liking. Typically, install in a ~/source/PS-Git directory.
+4. You can see if you have an existing $PROFILE by executing:
+```Get-Item $PROFILE```
+You can then add the customized Microsoft.PowerShell_profile.ps1 to that file or replace it. You may need to do:
+```New-Item -Path $PROFILE -ItemType "file" -Force``` 
+if one does not already exist
