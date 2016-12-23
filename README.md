@@ -10,7 +10,7 @@ _Note: this is an untrusted module per some corporate setups._ Therefore, you ma
 ```(new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex```  
 _Note: you must modify the default install script if you use the last method above._
 
-3. Customize the Microsoft.PowerShell_profile.ps1 in this directory to your liking. Typically, install in a ~/source/PS-Git directory.
+3. Customize the Microsoft.PowerShell_profile.ps1 in this directory to your liking. Typically, it is installed in the ~\\Documents\\WindowsPowerShell or  ~\\source\\PS-Git directories.
 4. You can see if you have an existing $PROFILE by executing:
 ```Get-Item $PROFILE```
 You can then add the customized Microsoft.PowerShell_profile.ps1 to that file or replace it. You may need to do:
