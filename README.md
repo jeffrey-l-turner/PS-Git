@@ -18,3 +18,4 @@ _Note: you must modify the default install script if you use the alternative abo
 You can then add the customized Microsoft.PowerShell_profile.ps1 to that file or replace it. You may need to do:
 ```New-Item -Path $PROFILE -ItemType "file" -Force``` 
 if one does not already exist
+5. In corporate environments you may not have the proper execution policy to run scripts. You can determine this by running `Get-ExecutionPolicy` and then setting the policy via `Set-ExecutionPolicy RemoteSigned`. _See: https://technet.microsoft.com/en-us/library/ee176961.aspx_
