@@ -1,4 +1,4 @@
-# This is a sample startup profile for use with Posh-git
+# Heavily customized profile originating from Posh-Git
 $h = (Get-Host).UI.RawUI;
 
 $h.BackgroundColor = "Blue" # RGB equiv for Atom is: ?
@@ -16,23 +16,28 @@ $global:GitAllSettings = New-Object PSObject -Property @{
 	FolderForegroundColor       = [ConsoleColor]::Cyan
 }
 
-function export-command-hist()
+Function export-command-hist()
 {
 	Get-History | Export-Csv ~\history.csv
 }
 
-function import-command-hist()
+Function import-command-hist()
 {
  	Import-Csv ~\history.csv | select -last 1000 | Add-History
 }
 
-function bye 
+Function bye 
 {
    Get-History -Count 500 | Export-CSV -Append ~\history.csv
-    exit
+   exit
+}
+
+Function FF($patt)
+{
+   Get-ChildItem . -Recurse -include * | Select-String -Pattern $patt
 }
  
-function git-all()
+Function git-all()
 {
 	$s = $global:GitAllSettings
 	dir -r -i .git -fo | % {
@@ -44,7 +49,7 @@ function git-all()
  	}
 }
  
-function git-trackall()
+Function git-trackall()
 {
 	$branchessp = git branch | %{$_ -replace "origin/"}
 	$branches = echo $branchessp | %{$_ -replace " *"}
@@ -200,7 +205,7 @@ End {
     Write-Verbose "Ending $($MyInvocation.Mycommand)"
 } #end
 
-} #end function Get-MyHistory
+} #end Function Get-MyHistory
 
 #define an optional alias
 Set-Alias -Name ht -Value Get-MyHistory
