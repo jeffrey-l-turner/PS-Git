@@ -74,11 +74,12 @@ $sw.Start()
 #git remote update 
 #git pull -a
 
+import-command-hist
 $sw.Stop()
 Write-Host "Completed in " $sw.Elapsed
 #git branch -v
 
-import-command-hist
+Write-Host "Remember to use 'bye' to exit shell..."
 
 
 Function Get-MyHistory {
