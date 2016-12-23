@@ -6,9 +6,7 @@ Git PowerShell setup
 1. First install git: http://git-scm.com/download/win
 2. Then, you may follow instructions from: https://github.com/dahlbyk/posh-git  or just execute:  
 ```Install-Module posh-git```  
-_Note: this is an untrusted module per some corporate setups._  
-Therefore, you may need to install per: http://psget.net/  
-From within PowerShell:  
+_Note: this is an untrusted module per some corporate setups._ Therefore, you may need to install per: http://psget.net/  Execute from within PowerShell:  
 ```(new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex```  
 _Note: you must modify the default install script if you use the last method above._
 
