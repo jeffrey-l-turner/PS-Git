@@ -1,5 +1,9 @@
-
-
+# from elevated shell:
+# Find-Module TabExpansionPlusPlus -repository PsGallery | Install-Module -Scope AllUsers
+#Find-Module NPMTabCompletion -repository PsGallery | Install-Module -Scope AllUsers
+# From a freshly opened prompt (that does not need to be elevated) and uncomment here
+# Import-Module TabExpansionPlusPlus
+# Import-Module NPMTabCompletion 
 
 # Heavily customized profile originating from Posh-Git
 $h = (Get-Host).UI.RawUI;
