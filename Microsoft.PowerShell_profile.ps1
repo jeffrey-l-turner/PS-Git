@@ -26,9 +26,9 @@ Function import-command-hist()
  	Import-Csv ~\history.csv | select -last 1000 | Add-History
 }
 
-Function eternal-hist($pattern)
+Function eternal-hist($Pattern)
 {
- 	Import-Csv ~\history.csv | select-string -pattern $pattern
+    Import-Csv ~\history.csv | where {$_.CommandLine -match $Pattern} |  Format-Table EndExecutionTime, CommandLine -auto
 }
 
 Function bye 
@@ -37,9 +37,9 @@ Function bye
    exit
 }
 
-Function FF($patt)
+Function FF($Pattern)
 {
-   Get-ChildItem . -Recurse -include * | Select-String -Pattern $patt
+   Get-ChildItem . -Recurse -include * | Select-String -Pattern $Pattern
 }
  
 Function git-all()
