@@ -4,6 +4,7 @@
 # From a freshly opened prompt (that does not need to be elevated) and uncomment here
 # Import-Module TabExpansionPlusPlus
 # Import-Module NPMTabCompletion 
+# Investigate: https://github.com/lzybkr/PSReadLine
 
 # Heavily customized profile originating from Posh-Git
 $h = (Get-Host).UI.RawUI;
