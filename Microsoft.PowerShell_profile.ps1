@@ -29,6 +29,11 @@ Function import-command-hist()
  	Import-Csv ~\history.csv | select -last 1000 | Add-History
 }
 
+Function eternal-hist($pattern)
+{
+ 	Import-Csv ~\history.csv | select-string -pattern $pattern
+}
+
 Function bye 
 {
    Get-History -Count 500 | Export-CSV -Append ~\history.csv
@@ -90,14 +95,14 @@ Write-Host "Completed in " $sw.Elapsed
 Write-Host "Remember to use 'bye' to exit shell..."
 
 
-Function Get-MyHistory {
+Function MyHist {
 <#
 
 .SYNOPSIS
 Gets a list of the commands entered during the current session.
 
 .DESCRIPTION
-The Get-MyHistory cmdlet gets session history, that is, the list of commands entered during the current session. This is a modified version of Get-History. In addition to the parameters of the original command, this version allows you to select only unique history entries as well as filter by a regular expression pattern.
+The MyHist cmdlet gets session history, that is, the list of commands entered during the current session. This is a modified version of Get-History. In addition to the parameters of the original command, this version allows you to select only unique history entries as well as filter by a regular expression pattern.
 Windows PowerShell automatically maintains a history of each session. The number of entries in the session history is determined by the value of the $MaximumHistoryCount preference variable. Beginning in Windows PowerShell 3.0, the default value is 4096.
 You can save the session history in XML or CSV format. By default, history files are saved in the home directory, but you can save the file in any location.
 
@@ -105,12 +110,12 @@ You can save the session history in XML or CSV format. By default, history files
 For more information about the history features in Windows PowerShell, see about_History (http://go.microsoft.com/fwlink/?LinkID=113233).
 
 .PARAMETER Count
-Displays the specified number of the most recent history entries. By, default, Get-MyHistory gets all entries in the session history. If you use both the Count and Id parameters in a command, the display ends with the command that is specified by the Id parameter.
+Displays the specified number of the most recent history entries. By, default, MyHist gets all entries in the session history. If you use both the Count and Id parameters in a command, the display ends with the command that is specified by the Id parameter.
 
-In Windows PowerShell 2.0, by default, Get-MyHistory gets the 32 most recent entries.
+In Windows PowerShell 2.0, by default, MyHist gets the 32 most recent entries.
 
 .PARAMETER Id
-Specifies the ID number of an entry in the session history. Get-MyHistory gets only the specified entry. If you use both the Id and Count parameters in a command, Get-MyHistory gets the most recent entries ending with the entry specified by the Id parameter.
+Specifies the ID number of an entry in the session history. MyHist gets only the specified entry. If you use both the Id and Count parameters in a command, MyHist gets the most recent entries ending with the entry specified by the Id parameter.
 
 .PARAMETER Pattern
 A regular expression pattern to match something in the commandline.
@@ -118,11 +123,11 @@ A regular expression pattern to match something in the commandline.
 .PARAMETER Unique
 Only display command history items with a unique command.
 .EXAMPLE
-PS C:\>Get-MyHistory -unique
+PS C:\>MyHist -unique
 This command gets the unique entries in the session history. The default display shows each command and its ID, which indicates the order of execution as well as the command's start and stop time.
 
 .EXAMPLE
-PS C:\>Get-MyHistory -pattern "service"
+PS C:\>MyHist -pattern "service"
 This command gets entries in the command history that include "service". 
 
 .NOTES
@@ -208,7 +213,7 @@ End {
     Write-Verbose "Ending $($MyInvocation.Mycommand)"
 } #end
 
-} #end Function Get-MyHistory
+} #end Function MyHist
 
 #define an optional alias
-Set-Alias -Name ht -Value Get-MyHistory
+Set-Alias -Name ht -Value MyHist

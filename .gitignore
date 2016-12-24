@@ -1,4 +1,4 @@
 Modules/
 NuGet_profile.ps1
 *.swp
-     
+*.orig
