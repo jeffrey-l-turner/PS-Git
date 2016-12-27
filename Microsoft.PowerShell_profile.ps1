@@ -1,17 +1,24 @@
-# from elevated shell:
-# Find-Module TabExpansionPlusPlus -repository PsGallery | Install-Module -Scope AllUsers
-#Find-Module NPMTabCompletion -repository PsGallery | Install-Module -Scope AllUsers
-# From a freshly opened prompt (that does not need to be elevated) and uncomment here
-# Import-Module TabExpansionPlusPlus
-# Import-Module NPMTabCompletion 
-# Investigate: https://github.com/lzybkr/PSReadLine
-
 # Heavily customized profile originating from Posh-Git
 $h = (Get-Host).UI.RawUI;
 
 $h.BackgroundColor = "Blue" # RGB equiv for Atom is: ?
 $h.ForegroundColor = "White";
 #cls
+
+# From: https://github.com/lzybkr/PSReadLine
+if ($host.Name -eq 'ConsoleHost')
+{
+    Import-Module PSReadline
+    Set-PSReadlineKeyHandler -Key Tab -Function Complete # sets bash style completion
+}
+
+# To initially install, from elevated shell:
+#Find-Module TabExpansionPlusPlus -repository PsGallery | Install-Module -Scope AllUsers
+#EFind-Module NPMTabCompletion -repository PsGallery | Install-Module -Scope AllUsers
+# From a freshly opened prompt (that does not need to be elevated) and uncomment here
+Import-Module TabExpansionPlusPlus
+Import-Module NPMTabCompletion 
+
 
 Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 #start-ssh-agent.cmd # this is started by default with post-git module using -quiet
