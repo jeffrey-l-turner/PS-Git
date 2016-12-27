@@ -12,10 +12,10 @@ if ($host.Name -eq 'ConsoleHost')
     Set-PSReadlineKeyHandler -Key Tab -Function Complete # sets bash style completion
 }
 
-# To initially install, from elevated shell:
-#Find-Module TabExpansionPlusPlus -repository PsGallery | Install-Module -Scope AllUsers
-#EFind-Module NPMTabCompletion -repository PsGallery | Install-Module -Scope AllUsers
-# From a freshly opened prompt (that does not need to be elevated) and uncomment here
+# To initially install, execute from an elevated shell:
+# Find-Module TabExpansionPlusPlus -repository PsGallery | Install-Module -Scope AllUsers
+# EFind-Module NPMTabCompletion -repository PsGallery | Install-Module -Scope AllUsers
+# From a freshly opened prompt (that does not need to be elevated) or uncomment here
 Import-Module TabExpansionPlusPlus
 Import-Module NPMTabCompletion 
 
