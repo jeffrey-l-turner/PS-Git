@@ -9,7 +9,7 @@ Git PowerShell setup
 _Note: this is an untrusted module per some corporate setups._ Therefore, you may need to install per: http://psget.net/  Execute from within PowerShell:  
 ```(new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex```  
 _Note: you must modify the default install script if you use the last method above._
-
+  If you get an error stating that you must upgrade to PowerShell 3 or greater, this guide and installation may be helpful for Windows 7 and 8 users: https://www.linkedin.com/pulse/getting-powershell-5-running-windows-7-server-2008-r2-darwin-sanoy.
 3. Customize the Microsoft.PowerShell_profile.ps1 in this directory to your liking. Typically, it is installed in the ~\\Documents\\WindowsPowerShell or, in my case, ~\\source\\PS-Git directories.
 4. You can see if you have an existing $PROFILE by executing:
 ```Get-Item $PROFILE```
