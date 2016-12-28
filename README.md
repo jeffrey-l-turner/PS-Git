@@ -22,6 +22,6 @@ if one does not already exist
   from an elevated shell to install it. The `Set-PSReadlineKeyHandler -Key Tab -Function Complete` sets up bash style completion. Change it to your liking or read the instructions at https://github.com/lzybkr/PSReadLine for more customization options.
 7. There is also command completion for `npm` in the profile. You must execute, from an elevated shell:  
 ```Find-Module TabExpansionPlusPlus -repository PsGallery | Install-Module -Scope AllUsers```  
-```EFind-Module NPMTabCompletion -repository PsGallery | Install-Module -Scope AllUsers```  
+```Find-Module NPMTabCompletion -repository PsGallery | Install-Module -Scope AllUsers```  
   to enable.
 
