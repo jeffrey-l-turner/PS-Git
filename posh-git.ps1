@@ -8,7 +8,8 @@ Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 Import-Module posh-git
 
 [System.Collections.Stack]$GLOBAL:dirStack = @()
-$GLOBAL:oldDir = ''
+$global:LASTEXITCODE = $realLASTEXITCODE
+$GLOBAL:oldDir = '~'
 $GLOBAL:nowPath = ''
 $GLOBAL:addToStack = $true
 
@@ -19,7 +20,7 @@ function global:prompt {
 
     $GLOBAL:nowPath = (Get-Location).Path
     if(($GLOBAL:nowPath -ne $oldDir) -AND ($GLOBAL:addToStack)){
-        $GLOBAL:dirStack.Push($oldDir)
+        $GLOBAL:dirStack.Push($GLOBAL:oldDir)
         $GLOBAL:oldDir = $GLOBAL:nowPath
     }
     $GLOBAL:AddToStack = $true
@@ -32,13 +33,15 @@ function global:prompt {
 }
 
 function BackOneDir{
-    echo $GLOBAL:addToStack
-    echo $GLOBAL:dirStack
-    if(($GLOBAL:nowPath -ne $oldDir) -AND $GLOBAL:addToStack -AND ($GLOBAL:oldDir -ne '')){
-    	$lastDir = $GLOBAL:dirStack.Pop()
-    	cd $lastDir
+    if(($GLOBAL:dirStack.count) -gt 1){
+        $GLOBAL:oldDir = $GLOBAL:dirStack.Pop()
+    } else {
+        $GLOBAL:oldDir = $GLOBAL:dirStack.Pop()
+        $GLOBAL:dirStack.Push($GLOBAL:nowPath)
     }
     $GLOBAL:addToStack = $false
+    cd $GLOBAL:oldDir
+
 }
 Set-Alias bd BackOneDir
 
