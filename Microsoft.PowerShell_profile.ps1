@@ -3,6 +3,7 @@ $h = (Get-Host).UI.RawUI;
 
 $h.BackgroundColor = "Blue" # RGB equiv for Atom is: ?
 $h.ForegroundColor = "White";
+Set-PSReadlineOption -TokenKind Parameter -ForegroundColor Magenta
 #cls
 
 # From: https://github.com/lzybkr/PSReadLine
