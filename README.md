@@ -25,10 +25,10 @@ if one does not already exist
 ```Find-Module NPMTabCompletion -repository PsGallery | Install-Module -Scope AllUsers```  
   to enable.
 
-  _Other Useful Utilities:_  
-    +https://pscx.codeplex.com/  
-      (```Find-Package pscx | Install-Package```)  
-    +https://github.com/bmatzelle/gow  
-      [GoW Installation Page](https://github.com/bmatzelle/gow/downloads "Download")
+_Other Useful Utilities:_  
++https://pscx.codeplex.com/  
+  (```Find-Package pscx | Install-Package```)  
++https://github.com/bmatzelle/gow  
+  [GoW Installation Page](https://github.com/bmatzelle/gow/downloads "Download")
 
 
