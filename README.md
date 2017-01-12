@@ -29,11 +29,11 @@ _Other Useful Utilities:_
 * https://pscx.codeplex.com/
 
 (```Find-Package pscx | Install-Package```)  
-* https://github.com/bmatzelle/gow
+* https://github.com/bmatzelle/gow -- a lighter weight set of bash/unix style utilities than Cygwin
 
 [GoW Installation Page](https://github.com/bmatzelle/gow/downloads "Download")
 
-ps1.vim for Syntax Highlight PowerShell ps1 files
+ps1.vim for Syntax Highlight PowerShell ps1 files:
 * ```git clone https://github.com/PProvost/vim-ps1 ~/vimfiles/bundle/vim-ps1```
 
 
