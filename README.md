@@ -33,4 +33,7 @@ _Other Useful Utilities:_
 
 [GoW Installation Page](https://github.com/bmatzelle/gow/downloads "Download")
 
+ps1.vim for Syntax Highlight PowerShell ps1 files
+* ```git clone https://github.com/PProvost/vim-ps1 ~/vimfiles/bundle/vim-ps1```
+
 
