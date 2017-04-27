@@ -1,7 +1,7 @@
 # Heavily customized profile originating from Posh-Git
 $h = (Get-Host).UI.RawUI;
 
-$h.BackgroundColor = "Blue" # RGB equiv for Atom is: ?
+$h.BackgroundColor = "Black" 
 $h.ForegroundColor = "White";
 Set-PSReadlineOption -TokenKind Parameter -ForegroundColor Magenta
 #cls
@@ -162,7 +162,7 @@ http://jdhitsolutions.com/blog/essential-powershell-resources/
 Int64
 
 .OUTPUTS
-Microsoft.PowerShell.Commands.HistoryInfo
+icrosoft.PowerShell.Commands.HistoryInfo
 .LINK
 Add-History
 Clear-History
@@ -227,6 +227,103 @@ End {
 } #end
 
 } #end Function MyHist
+# Setup Gulp command completion:
+$gulp_completion_Process = {
+    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
+
+
+	# Load up an assembly to read the gulpfile's sha1
+	if(-not $global:GulpSHA1Managed) {
+		[Reflection.Assembly]::LoadWithPartialName("System.Security") | out-null
+		$global:GulpSHA1Managed = new-Object System.Security.Cryptography.SHA1Managed
+	}
+
+	# setup a global (in-memory) cache
+	if(-not $global:GulpfileShaCache) {
+		$global:GulpfileShaCache = @{};
+	}
+
+	$cache = $global:GulpfileShaCache;
+
+	# Get the gulpfile's sha1
+	$sha1gulpFile = (resolve-path gulpfile.js -ErrorAction Ignore | %{
+		$file = [System.IO.File]::Open($_.Path, "open", "read")
+		[string]::join('', ($global:GulpSHA1Managed.ComputeHash($file) | %{ $_.ToString("x2") }))
+		$file.Dispose()
+	})
+
+	# lookup the sha1 for previously cached task lists.
+	if($cache.ContainsKey($sha1gulpFile)){
+		$tasks = $cache[$sha1gulpFile];
+	} else {
+		$tasks = (gulp --tasks-simple).split("`n");
+		$cache[$sha1gulpFile] = $tasks;
+	}
+
+
+    $tasks |
+        where { $_.startswith($commandName) }
+        Sort-Object |
+        foreach { New-Object System.Management.Automation.CompletionResult $_, $_, 'ParameterValue', ('{0}' -f $_) }
+}
+
+if (-not $global:options) {
+    $global:options = @{
+        CustomArgumentCompleters = @{};
+        NativeArgumentCompleters = @{}
+    }
+}
+
+$gulp_completion_Process = {
+    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
+
+
+	# Load up an assembly to read the gulpfile's sha1
+	if(-not $global:GulpSHA1Managed) {
+		[Reflection.Assembly]::LoadWithPartialName("System.Security") | out-null
+		$global:GulpSHA1Managed = new-Object System.Security.Cryptography.SHA1Managed
+	}
+
+	# setup a global (in-memory) cache
+	if(-not $global:GulpfileShaCache) {
+		$global:GulpfileShaCache = @{};
+	}
+
+	$cache = $global:GulpfileShaCache;
+
+	# Get the gulpfile's sha1
+	$sha1gulpFile = (resolve-path gulpfile.js -ErrorAction Ignore | %{
+		$file = [System.IO.File]::Open($_.Path, "open", "read")
+		[string]::join('', ($global:GulpSHA1Managed.ComputeHash($file) | %{ $_.ToString("x2") }))
+		$file.Dispose()
+	})
+
+	# lookup the sha1 for previously cached task lists.
+	if($cache.ContainsKey($sha1gulpFile)){
+		$tasks = $cache[$sha1gulpFile];
+	} else {
+		$tasks = (gulp --tasks-simple).split("`n");
+		$cache[$sha1gulpFile] = $tasks;
+	}
+
+
+    $tasks |
+        where { $_.startswith($commandName) }
+        Sort-Object |
+        foreach { New-Object System.Management.Automation.CompletionResult $_, $_, 'ParameterValue', ('{0}' -f $_) }
+}
+
+if (-not $global:options) {
+    $global:options = @{
+        CustomArgumentCompleters = @{};
+        NativeArgumentCompleters = @{}
+    }
+}
+
+$global:options['NativeArgumentCompleters']['gulp'] = $gulp_completion_Process
+$function:tabexpansion2 = $function:tabexpansion2 -replace 'End\r\n{','End { if ($null -ne $options) { $options += $global:options} else {$options = $global:options}'
+
+Invoke-Expression ((gulp --completion=powershell) -join [System.Environment]::NewLine)
 
 #define an optional alias
 Set-Alias -Name ht -Value MyHist

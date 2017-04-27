@@ -18,14 +18,14 @@ function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
     $global:LASTEXITCODE = $realLASTEXITCODE
 
-    $GLOBAL:nowPath = (Get-Location).Path
+    $GLOBAL:nowPath = $pwd.ProviderPath
     if(($GLOBAL:nowPath -ne $GLOBAL:oldDir) -AND ($GLOBAL:addToStack)){
-    	Write-Host(" nowPAth changed: ") -nonewline
-    	Write-Host($GLOBAL:nowPath) 
+        Write-Host(" nowPAth changed: ") -nonewline
+        Write-Host($GLOBAL:nowPath) 
 
-    	if(($GLOBAL:dirStack.count) -gt 1){
-            $GLOBAL:dirStack = @()
-    	}
+        if(($GLOBAL:dirStack.count) -eq 0){
+            $GLOBAL:dirStack.push($GLOBAL:nowPath) 
+        }
         $GLOBAL:dirStack.Push($GLOBAL:oldDir)
         $GLOBAL:oldDir = $GLOBAL:nowPath
     }
